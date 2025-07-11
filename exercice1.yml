@@ -1,0 +1,26 @@
+
+- name: Configuration du VLAN, IP et trunk
+  hosts: switches
+  gather_facts: no
+
+  tasks:
+    - name: Créer un  VLAN de gestion
+      ios_config:
+        lines:
+          - vlan 10
+          - name Gestion
+
+    - name: Activation de interface et attribution IP
+      ios_config:
+        lines:
+          - interface Vlan10
+          - ip address 192.168.10.1 255.255.255.0
+          - no shutdown
+
+    - name: Configuration interface en trunk
+      ios_config:
+        lines:
+          - interface GigabitEthernet0/1
+          - switchport mode trunk
+          - switchport trunk allowed vlan 10,20,30
+          - no shutdown
