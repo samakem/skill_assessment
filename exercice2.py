@@ -1,4 +1,3 @@
-
 def nombre_voisinages_ospf(nb_routeurs):
     if nb_routeurs <= 1:
         return 0
